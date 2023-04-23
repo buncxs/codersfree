@@ -12,6 +12,10 @@
         @apply  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
     }
 
+    /* Form Styles */
+    .form-control {
+        @apply border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm;
+    }
 
 }
 

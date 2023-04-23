@@ -49,6 +49,16 @@
                         </div>
                     </div>
                 </div>
+                @if ($product->subcategory->size)
+                    <!-- Livewire component add-cart-item-size -->
+                    @livewire('add-cart-item-size', ['product' => $product])
+                @elseif($product->subcategory->color)
+                    <!-- Livewire component add-cart-item-color -->
+                    @livewire('add-cart-item-color', ['product' => $product])
+                @else
+                    <!-- Livewire component add-cart-item -->
+                    @livewire('add-cart-item', ['product' => $product])
+                @endif
             </div>
         </div>
     </div>
