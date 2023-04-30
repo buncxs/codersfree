@@ -22,6 +22,16 @@ class AddCartItemColor extends Component
         return view('livewire.add-cart-item-color');
     }
 
+    public function decrement()
+    {
+        $this->qty = $this->qty - 1;
+    }
+
+    public function increment()
+    {
+        $this->qty = $this->qty + 1;
+    }
+
     public function updatedColorId($value)
     {
         $this->stock = $this->product->colors->find($value)->pivot->quantity;
