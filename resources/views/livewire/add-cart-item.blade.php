@@ -15,7 +15,9 @@
             </x-secondary-button>
         </div>
         <div class="flex-1">
-            <x-button wire:click="addItem" wire:loading.attr="disabled" wire:target="addItem"
+            <x-button 
+                x-bind:disabled="$wire.qty > $wire.stock"
+                wire:click="addItem" wire:loading.attr="disabled" wire:target="addItem"
                 class="w-full justify-center bg-orange-500 hover:bg-orange-600 focus:bg-orange-600 active:bg-orange-800">
                 agregar al carrito de compras
             </x-button>

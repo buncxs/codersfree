@@ -3,6 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Size;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class AddCartItemSize extends Component
@@ -13,18 +15,43 @@ class AddCartItemSize extends Component
     public $size_id = "";
     public $color_id = "";
     public $colors = [];
+    public $options = [];
+
+    public function mount()
+    {
+      $this->sizes = $this->product->sizes;
+      $this->options['image'] = Storage::url($this->product->images->first()->url);
+    }
 
     public function updatedSizeId($value)
     {
       $size = Size::find($value);
       $this->colors = $size->colors;
       $this->color_id = "";
+      $this->options['size'] = $size->name;
     }
 
     public function updatedColorId($value)
     {
       $size = Size::find($this->size_id);
-      $this->stock = $size->colors->find($value)->pivot->quantity;
+      $color = $size->colors->find($value);
+      $this->stock = qty_available($this->product->id, $color->id, $size->id);
+      $this->options['color'] = $color->name;
+    }
+
+    public function addItem()
+    {
+        Cart::add([
+            'id'      => $this->product->id, 
+            'name'    => $this->product->name, 
+            'qty'     => $this->qty, 
+            'price'   => $this->product->price,
+            'options' => $this->options,
+        ]);
+
+        $this->stock = qty_available($this->product->id, $this->color_id, $this->size_id);
+        $this->reset('qty');
+        $this->emitTo('dropdown-cart', 'render');
     }
 
     public function decrement()
@@ -37,10 +64,6 @@ class AddCartItemSize extends Component
         $this->qty = $this->qty + 1;
     }
 
-    public function mount()
-    {
-      $this->sizes = $this->product->sizes;
-    }
 
     public function render()
     {

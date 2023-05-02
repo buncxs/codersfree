@@ -11,7 +11,7 @@ class Size extends Model
 
     protected $fillable = ['name', 'product_id'];
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(Product::class);
     }
