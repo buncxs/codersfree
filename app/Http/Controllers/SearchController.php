@@ -10,8 +10,9 @@ class SearchController extends Controller
     {
       $name = $request->name;
       $products = Product::where('name', 'LIKE', "%" . $name . "%")
-                              ->where('status', 2)
-                              ->paginate(8);
+                           ->where('status', 2)
+                           ->paginate(8)
+                           ->withQueryString();
       return view('search', compact('products'));
     }
 }
