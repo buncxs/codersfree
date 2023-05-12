@@ -22,7 +22,7 @@ class UpdateCartItem extends Component
         $this->qty = $this->qty - 1;
         $item = Cart::update($this->rowId, $this->qty);
         $this->stock = qty_available($item->id);
-        $this->emitTo('dropdown-cart', 'render');
+        $this->emit('render');
     }
 
     public function increment()
@@ -30,12 +30,11 @@ class UpdateCartItem extends Component
         $this->qty = $this->qty + 1;
         $item = Cart::update($this->rowId, $this->qty);
         $this->stock = qty_available($item->id);
-        $this->emitTo('dropdown-cart', 'render');
+        $this->emit('render');
     }
 
     public function render()
     {
-        
         return view('livewire.update-cart-item');
     }
 }

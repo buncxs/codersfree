@@ -1,15 +1,14 @@
 <?php
 
-use App\Models\Color;
 use App\Models\Product;
-use app\Models\Size;
+use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 function quantity($product_id, $color_id = null, $size_id = null)
 {
     $product = Product::find($product_id);
     if($size_id)
-    {
+    {   
         $size = Size::find($size_id);
         $quantity = $size->colors->find($color_id)->pivot->quantity;
     }elseif($color_id)

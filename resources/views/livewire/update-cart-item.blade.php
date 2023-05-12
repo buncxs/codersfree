@@ -3,7 +3,7 @@
         wire:click="decrement">
         -
     </x-secondary-button>
-    <span class="mx-2 text-gray-700">{{ $qty }}</span>
+    <span class="mx-4 text-gray-700">{{ $qty }}</span>
     <x-secondary-button x-bind:disabled="!$wire.stock > 0" wire:loading.attr="disabled" wire:target="increment"
         wire:click="increment">
         +

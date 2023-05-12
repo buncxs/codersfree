@@ -22,7 +22,7 @@ class UpdateCartItemColor extends Component
         $this->qty = $this->qty - 1;
         $item = Cart::update($this->rowId, $this->qty);
         $this->stock = qty_available($item->id, $item->options->color_id);
-        $this->emitTo('dropdown-cart', 'render');
+        $this->emit('render');
     }
 
     public function increment()
@@ -30,8 +30,9 @@ class UpdateCartItemColor extends Component
         $this->qty = $this->qty + 1;
         $item = Cart::update($this->rowId, $this->qty);
         $this->stock = qty_available($item->id, $item->options->color_id);
-        $this->emitTo('dropdown-cart', 'render');
+        $this->emit('render');
     }
+      
 
     public function render()
     {
