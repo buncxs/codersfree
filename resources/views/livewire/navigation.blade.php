@@ -1,4 +1,4 @@
-<header class="bg-neutral-700 sticky top-0 z-50" x-data="dropdown()">
+<header class="bg-neutral-700 sticky top-0" style="z-index: 10000" x-data="dropdown()">
     <div class="container flex items-center justify-between md:justify-start h-16">
         <!-- Categorias button -->
         <a href="#"

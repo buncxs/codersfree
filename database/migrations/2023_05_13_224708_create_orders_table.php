@@ -15,6 +15,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->string('contact');
+            $table->string('phone');
+            
             $table->enum('status', [
               Order::PENDIENTE,
               Order::RECIBIDO,
@@ -26,9 +29,11 @@ return new class extends Migration
             $table->float('shipping_cost');
             $table->float('total');
             $table->json('content');
-            $table->foreignId('department_id')->constrained();
-            $table->foreignId('city_id')->constrained();
-            $table->foreignId('district_id')->constrained();
+            $table->foreignId('department_id')->nullable()->constrained();
+            $table->foreignId('city_id')->nullable()->constrained();
+            $table->foreignId('district_id')->nullable()->constrained();
+            $table->string('address')->nullable();
+            $table->string('reference')->nullable();
             $table->timestamps();
         });
     }
