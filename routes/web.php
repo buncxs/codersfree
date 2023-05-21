@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -8,8 +10,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Livewire\CreateOrder;
 use App\Http\Livewire\PaymentOrder;
 use App\Http\Livewire\ShoppingCart;
-use App\Models\Order;
-use Illuminate\Support\Facades\Route;
+
 
 
 /*
@@ -47,20 +48,3 @@ Route::middleware([
   Route::get('orders/{order}/payment', PaymentOrder::class)->name('orders.payment');
 });
 
-Route::get('prueba', function () {
-  // Know the 10 last minutes
-  $hour = now()->subMinute(10);
-  $orders = Order::where('status', 1)
-    ->whereTime('created_at', '<=', $hour)
-    ->get();
-  foreach ($orders as $order) {
-    $items = json_decode($order->content);
-
-    foreach ($items as $item) {
-      increase($item);
-    }
-    $order->status = 5;
-    $order->save();
-  }
-  return "Se formateo con exito";
-});

@@ -43,6 +43,12 @@
                         <x-dropdown-link href="{{ route('orders.index') }}">
                             {{ __('Orders') }}
                         </x-dropdown-link>
+                        
+                        <!-- Admin -->
+                        <x-dropdown-link href="{{ route('admin.index') }}">
+                            {{ __('Administrador') }}
+                        </x-dropdown-link>
+
                         <div class="border-t border-gray-200"></div>
 
                         <!-- Authentication -->
