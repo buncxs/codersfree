@@ -34,35 +34,5 @@
             </x-button>
         </div>
     </div>
-    <div class="bg-white shadow-xl rounded-lg p-6">
-        <table>
-            <thead>
-                <tr>
-                    <th class="px-4 py-2 w-1/3">Color</th>
-                    <th class="px-4 py-2 w-1/3">Cantidad</th>
-                    <th class="px-4 py-2 w-1/3"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($product_colors as $product_color)
-                    <tr>
-                        <td class=" capitalize px-4 py-2">
-                            {{ $colors->find($product_color->pivot->color_id)->name }}
-                        </td>
-                        <td class="px-4 py-2">
-                            {{ $product_color->pivot->quantity }}
-                        </td>
-                        <td class="px-4 py-2 flex">
-                            <x-secondary-button class="ml-auto mr-2">
-                                Actualizar
-                            </x-secondary-button>
-                            <x-secondary-danger>
-                                Eliminar
-                            </x-secondary-danger>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    
 </div>

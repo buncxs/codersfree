@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 class ShowProducts extends Component
 {
     use WithPagination;
-    
+
     public $search;
 
     public function updatingSearch()
@@ -20,8 +20,10 @@ class ShowProducts extends Component
 
     public function render()
     {
-        $products = Product::where('name', 'like', '%' . $this->search . '%')
+
+        $products = Product::where('name', 'like', '%' . $this->search . '%')->with('subcategory.category')
             ->paginate(10);
+
         return view('livewire.admin.show-products', compact('products'))->layout('layouts.admin');
     }
 }

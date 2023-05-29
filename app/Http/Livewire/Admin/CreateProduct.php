@@ -64,6 +64,7 @@ class CreateProduct extends Component
       }
     }
     $this->validate($rules);
+    
     $product = new Product();
     $product->name = $this->name;
     $product->slug = $this->slug;

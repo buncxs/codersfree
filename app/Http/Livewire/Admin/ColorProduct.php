@@ -39,7 +39,7 @@ class ColorProduct extends Component
 
   public function render()
   {
-    $product_colors = $this->product->color;
-    return view('livewire.admin.color-product', compact('product_colors'));
+
+    return view('livewire.admin.color-product');
   }
 }

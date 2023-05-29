@@ -45,18 +45,18 @@
         <div class="mb-4">
             <div wire:ignore>
                 <x-label value="Descripcion" />
-                <textarea class="w-full form-control" rows="4" x-data x-init="ClassicEditor
-                    .create($refs.miEditor)
-                    .then(function(editor) {
-                        editor.model.document.on('change:data', () => {
-                            $dispatch('input', editor.getData())
+                <textarea class="w-full form-control" rows="4" wire:model.defer="product.description" x-data
+                    x-init="ClassicEditor
+                        .create($refs.miEditor)
+                        .then(function(editor) {
+                            editor.model.document.on('change:data', () => {
+                                $dispatch('input', editor.getData())
+                            })
                         })
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });" x-ref="miEditor"
-                    wire:model.defer="product.description">
-                </textarea>
+                        .catch(error => {
+                            console.error(error);
+                        });" x-ref="miEditor">
+            </textarea>
             </div>
             <x-input-error for="product.description" />
         </div>
@@ -75,16 +75,16 @@
             {{-- Price --}}
             <div>
                 <x-label value="Precio" />
-                <x-input wire:model.defer="product.price" type="number" class="w-full" step=".01" />
+                <x-input wire:model="product.price" type="number" class="w-full" step=".01" />
                 <x-input-error for="product.price" />
             </div>
         </div>
-        @if ($subcategory)
-            @if (!$subcategory->color && !$subcategory->size)
+        @if ($this->subcategory)
+            @if (!$this->subcategory->color && !$this->subcategory->size)
                 {{-- Quantity --}}
                 <div class="mb-4">
                     <x-label value="cantidad" />
-                    <x-input wire:model.lazy="product.quantity" type="number" class="w-full" />
+                    <x-input wire:model="product.quantity" type="number" class="w-full" />
                     <x-input-error for="product.quantity" />
                 </div>
             @endif
@@ -94,16 +94,18 @@
             <x-action-message class="mr-3" on="saved">
                 Actualizado
             </x-action-message>
-            <x-button class="" wire:loading.attr="disabled" wire:target="save" wire:click="save">
+            <x-button wire:loading.attr="disabled" wire:target="save" wire:click="save">
                 Actualizar producto
             </x-button>
         </div>
     </div>
-    @if ($subcategory)
-        @if ($subcategory->size)
-            @livewire('admin.size-product', ['product' => $product], key('size-product-' . $product->id))
-        @elseif($subcategory->color)
-            @livewire('admin.color-product', ['product' => $product], key('color-product-' . $product->id))
+
+    @if ($this->subcategory)
+        @if ($this->subcategory->size)
+            @livewire('admin.size-product', ['product' => $product], key('size-product' . $product->id))
+        @elseif ($this->subcategory->color)
+            @livewire('admin.color-product', ['product' => $product], key('color-product' . $product->id))
         @endif
     @endif
+
 </div>
